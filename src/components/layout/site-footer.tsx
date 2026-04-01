@@ -50,10 +50,10 @@ export function SiteFooter() {
       <SectionContainer className="py-16 lg:py-20">
 
         {/* Main grid — brand left, links right */}
-        <div className="grid gap-12 sm:grid-cols-[1fr_auto] lg:gap-20">
+        <div className="grid items-start gap-12 sm:grid-cols-[1fr_auto] lg:gap-20">
 
           {/* ── Left: Brand ── */}
-          <div className="max-w-sm">
+          <div className="max-w-sm self-start">
             <Image
               src="/logo.svg"
               alt="Divinely Seeded logo"
