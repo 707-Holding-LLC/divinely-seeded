@@ -1,0 +1,25 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Divinely Seeded — Icon Mark -->
+
+  <!-- Warm background circle -->
+  <circle cx="100" cy="100" r="90" fill="#f5f0e8"/>
+
+  <!-- Three leaf petals — mind, body, spirit -->
+  <ellipse cx="76" cy="88" rx="26" ry="46" fill="#7a9e6e" opacity="0.85" transform="rotate(-30 76 88)"/>
+  <ellipse cx="124" cy="88" rx="26" ry="46" fill="#5a7d4a" opacity="0.85" transform="rotate(30 124 88)"/>
+  <ellipse cx="100" cy="68" rx="22" ry="44" fill="#3d6b3d"/>
+
+  <!-- Seed core -->
+  <ellipse cx="100" cy="106" rx="13" ry="18" fill="#c8a96e"/>
+  <ellipse cx="100" cy="102" rx="5" ry="8" fill="#e8c98e" opacity="0.75"/>
+
+  <!-- Root lines -->
+  <line x1="100" y1="124" x2="84" y2="144" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="100" y1="124" x2="100" y2="148" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="100" y1="124" x2="116" y2="144" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Outer divine circle -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#c8a96e" stroke-width="1.2" opacity="0.55"/>
+  <!-- Inner ring -->
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#7a9e6e" stroke-width="0.6" opacity="0.4"/>
+</svg>
