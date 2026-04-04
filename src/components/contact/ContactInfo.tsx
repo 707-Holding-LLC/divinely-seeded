@@ -55,12 +55,12 @@ export function ContactInfo() {
       {/* Visit Our Sanctuary */}
       <div className="space-y-6">
         <h3 className="font-heading text-2xl font-bold text-[var(--foreground)]">
-          Visit Our Sanctuary
+          Virtual Sessions
         </h3>
         <p className="text-base leading-7 text-[var(--muted)]">
-          Located in the heart of the city, our office is designed to be a
-          peaceful retreat from the daily hustle. We welcome scheduled visits
-          for in-person sessions.
+          All sessions are held virtually, so you can connect with Nnenna
+          from the comfort of your own space.
+
         </p>
 
         
