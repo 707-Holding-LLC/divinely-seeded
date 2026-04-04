@@ -44,7 +44,7 @@ export function AboutFounderSection() {
             <div className="rounded-[30px] bg-[#ecece6] p-4 shadow-[0_20px_50px_rgba(16,32,66,0.08)]">
               <div className="relative aspect-[4/4.3] overflow-hidden rounded-[26px] bg-white">
                 <Image
-                  src="/headshot.jpeg"
+                  src="/nnenna-1.png"
                   alt="Nnenna Animashaun"
                   fill
                   priority

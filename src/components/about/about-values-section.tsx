@@ -67,7 +67,7 @@ export function AboutValuesSection() {
             <div className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-[30px] shadow-[0_18px_45px_rgba(16,32,66,0.08)]">
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/our-values-mission.png"
+                  src="/beautiful-nnenna-2.jpeg"
                   alt="Divinely Seeded mission and values"
                   fill
                   priority

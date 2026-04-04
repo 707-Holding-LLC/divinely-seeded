@@ -36,7 +36,7 @@ export const featuredPrograms = [
     title: "1-on-1 Personalized Coaching",
     description:
       "Deep-dive wellness sessions tailored to your goals, lifestyle, and personal growth journey.",
-    image: "/personalized-coaching.png",
+    image: "/beautiful-nnenna-3.jpeg",
     badge: "Premium",
     href: "/programs",
   },

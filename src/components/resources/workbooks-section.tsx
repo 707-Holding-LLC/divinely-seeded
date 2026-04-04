@@ -16,7 +16,7 @@ const downloads = [
     tag: "Mindset & Self-Love",
     pages: "54 pages",
     href: "/downloads/happiness-through-self-care.pdf",
-    cover: "/resource-cover-selfcare.png", // replace with real cover image
+    cover: "/happiness.png", // replace with real cover image
   },
   {
     title: "Mindful Eating Reset",
@@ -26,7 +26,7 @@ const downloads = [
     tag: "Nutrition & Gut Health",
     pages: "12 pages",
     href: "/downloads/mindful-eating-reset.pdf",
-    cover: "/resource-cover-gutreset.png", // replace with real cover image
+    cover: "/minful-reset.png", // replace with real cover image
   },
 ];
 
@@ -70,14 +70,14 @@ export function WorkbooksSection() {
                       </p>
                     </div>
                   </div>
-                  {/* Uncomment once real cover images exist:
+                  
                   <Image
                     src={item.cover}
                     alt={item.title}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.03]"
                   />
-                  */}
+                 
                 </div>
 
                 {/* Content */}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 
-const PHONE    = "(872) 810-3236";
+//const PHONE    = "(872) 810-3236";
 const EMAIL    = "info@divinelyseeded.com";
 //const ADDRESS1 = "1 E Erie St Suite 525-3498";
 //const ADDRESS2 = "Chicago, IL 60611";
@@ -67,17 +67,7 @@ export function ContactInfo() {
 
         {/* Phone + Email */}
         <div className="grid grid-cols-2 gap-6">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand)]">
-              Call Us
-            </p>
-            <a
-              href="tel:+18728103236"
-              className="mt-1 block text-base font-semibold text-[var(--foreground)] transition hover:text-[var(--brand)]"
-            >
-              {PHONE}
-            </a>
-          </div>
+          
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand)]">
               Email Us
