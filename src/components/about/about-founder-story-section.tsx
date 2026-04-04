@@ -35,7 +35,7 @@ export function AboutFounderStorySection() {
           <Reveal delay={0.2}>
             <p className="text-lg leading-8 text-[var(--muted)] sm:text-xl">
               That personal journey eventually led her to formal training in
-              integrative wellness — and to a calling much larger than herself.
+              integrative wellness and to a calling much larger than herself.
               She also grew up watching her parents work tirelessly to
               build their businesses, often with limited resources, A foundation
               that shaped her lifelong commitment to resilience, opportunity, and

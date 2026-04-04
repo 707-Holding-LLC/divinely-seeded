@@ -42,7 +42,7 @@ export function ImpactGallerySection() {
 
               <div className="relative min-h-[250px] overflow-hidden rounded-[26px]">
                 <Image
-                  src="/women-4.png"
+                  src="/women-5.jpeg"
                   alt="Group connection"
                   fill
                   className="object-cover"
