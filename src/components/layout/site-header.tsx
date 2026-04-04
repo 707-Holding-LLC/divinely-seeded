@@ -29,9 +29,7 @@ export function SiteHeader() {
       "/community-impact",
       "/contact",
     ];
-
     const orderMap = new Map(desiredOrder.map((href, index) => [href, index]));
-
     return [...navLinks].sort((a, b) => {
       const aIndex = orderMap.get(a.href) ?? 999;
       const bIndex = orderMap.get(b.href) ?? 999;
@@ -41,11 +39,7 @@ export function SiteHeader() {
 
   const isActiveLink = (href: string) => {
     const normalizedHref = normalizePath(href);
-
-    if (normalizedHref === "/") {
-      return pathname === "/";
-    }
-
+    if (normalizedHref === "/") return pathname === "/";
     return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
   };
 
@@ -54,21 +48,23 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(248,246,243,0.95)] backdrop-blur">
       <div className="mx-auto flex h-24 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+
+        {/* ── Logo — larger and left-aligned ── */}
         <Link href="/" className="shrink-0" onClick={closeMobileMenu}>
           <Image
-            src="/logo.svg"
+            src="/seeded-logo.svg"
             alt="Divinely Seeded logo"
-            width={180}
-            height={64}
+            width={220}
+            height={72}
             priority
-            className="h-auto w-[110px] sm:w-[130px] md:w-[150px] lg:w-[160px]"
+            className="h-auto w-[140px] sm:w-[170px] md:w-[190px] lg:w-[210px]"
           />
         </Link>
 
+        {/* ── Desktop nav ── */}
         <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
           {orderedNavLinks.map((link) => {
             const isActive = isActiveLink(link.href);
-
             return (
               <Link
                 key={link.label}
@@ -89,12 +85,9 @@ export function SiteHeader() {
           })}
         </nav>
 
+        {/* ── CTA + mobile toggle ── */}
         <div className="flex items-center gap-3">
-          <motion.div
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="hidden sm:block"
-          >
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="hidden sm:block">
             <Link
               href="/contact"
               className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)] lg:px-6"
@@ -115,6 +108,7 @@ export function SiteHeader() {
         </div>
       </div>
 
+      {/* ── Mobile menu ── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -122,13 +116,12 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className="border-t border-[var(--line)] bg-[var(--background)] lg:hidden"
+            className="border-t border-[var(--line)] bg-(--background) lg:hidden"
           >
             <div className="mx-auto flex w-full max-w-7xl flex-col px-4 py-4 sm:px-6">
               <nav className="flex flex-col">
                 {orderedNavLinks.map((link) => {
                   const isActive = isActiveLink(link.href);
-
                   return (
                     <Link
                       key={link.label}

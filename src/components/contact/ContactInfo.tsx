@@ -3,8 +3,8 @@ import { MapPin } from "lucide-react";
 
 const PHONE    = "(872) 810-3236";
 const EMAIL    = "info@divinelyseeded.com";
-const ADDRESS1 = "1 E Erie St Suite 525-3498";
-const ADDRESS2 = "Chicago, IL 60611";
+//const ADDRESS1 = "1 E Erie St Suite 525-3498";
+//const ADDRESS2 = "Chicago, IL 60611";
 
 // ── Inline SVGs — lucide-react does not export brand icons ───────────────────
 function IconInstagram() {
@@ -63,14 +63,7 @@ export function ContactInfo() {
           for in-person sessions.
         </p>
 
-        {/* Address */}
-        <div className="flex items-start gap-3">
-          <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand)]" />
-          <div className="text-base text-[var(--foreground)]">
-            <p>{ADDRESS1}</p>
-            <p>{ADDRESS2}</p>
-          </div>
-        </div>
+        
 
         {/* Phone + Email */}
         <div className="grid grid-cols-2 gap-6">

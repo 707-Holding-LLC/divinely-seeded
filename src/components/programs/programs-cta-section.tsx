@@ -25,7 +25,7 @@ export function ProgramsCtaSection() {
                   Book a Discovery Call
                 </ButtonLink>
 
-                <ButtonLink href="/contact" variant="dark" className="min-w-[250px]">
+                <ButtonLink href="/resources" variant="dark" className="min-w-[250px]">
                   Download Brochure
                 </ButtonLink>
               </div>
