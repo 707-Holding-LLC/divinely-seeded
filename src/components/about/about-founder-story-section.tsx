@@ -36,9 +36,9 @@ export function AboutFounderStorySection() {
             <p className="text-lg leading-8 text-[var(--muted)] sm:text-xl">
               That personal journey eventually led her to formal training in
               integrative wellness — and to a calling much larger than herself.
-              She also grew up watching her immigrant parents work tirelessly to
+              She also grew up watching her parents work tirelessly to
               build their businesses, often with limited resources, A foundation
-              that shaped her commitment to resilience, opportunity, and
+              that shaped her lifelong commitment to resilience, opportunity, and
               empowerment.
             </p>
           </Reveal>
