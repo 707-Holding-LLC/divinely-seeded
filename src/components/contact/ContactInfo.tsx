@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { MapPin } from "lucide-react";
+//import { MapPin } from "lucide-react";
 
 //const PHONE    = "(872) 810-3236";
-const EMAIL    = "info@divinelyseeded.com";
+//const EMAIL    = "info@divinelyseeded.com";
 //const ADDRESS1 = "1 E Erie St Suite 525-3498";
 //const ADDRESS2 = "Chicago, IL 60611";
 
@@ -70,13 +70,17 @@ export function ContactInfo() {
           
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand)]">
-              Email Us
+              Get In Touch
             </p>
             <a
-              href={`mailto:${EMAIL}`}
-              className="mt-1 block break-all text-base font-semibold text-[var(--foreground)] transition hover:text-[var(--brand)]"
+              href="mailto:info@divinelyseeded.com"
+              className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)]"
             >
-              {EMAIL}
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              Send Us an Email
             </a>
           </div>
         </div>
