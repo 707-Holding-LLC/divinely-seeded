@@ -37,7 +37,7 @@ export function AboutFounderStorySection() {
               That personal journey eventually led her to formal training in
               integrative wellness and to a calling much larger than herself.
               She also grew up watching her parents work tirelessly to
-              build their businesses, often with limited resources, A foundation
+              build their businesses, often with limited resources. A foundation
               that shaped her lifelong commitment to resilience, opportunity, and
               empowerment.
             </p>
