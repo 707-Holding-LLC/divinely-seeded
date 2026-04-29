@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionContainer } from "@/components/layout/section-container";
 
+const CALENDLY_URL = "https://calendly.com/divinelyseeded";
+
 function IconInstagram() {
   return (
     <svg
@@ -161,12 +163,14 @@ export function SiteFooter() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--foreground)]">
                 Book a Session
               </p>
-              <Link
-                href="/contact"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-3 inline-flex text-[15px] text-[var(--muted)] transition hover:text-[var(--brand)] sm:text-base"
               >
                 Start your journey →
-              </Link>
+              </a>
             </div>
           </div>
         </div>

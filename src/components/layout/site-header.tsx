@@ -9,6 +9,8 @@ import { navLinks } from "@/data/site";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
+const CALENDLY_URL = "https://calendly.com/divinelyseeded";
+
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith("/")) {
     return path.slice(0, -1);
@@ -48,8 +50,6 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(248,246,243,0.95)] backdrop-blur">
       <div className="mx-auto flex h-24 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-
-        {/* ── Logo — larger and left-aligned ── */}
         <Link href="/" className="shrink-0" onClick={closeMobileMenu}>
           <Image
             src="/seeded-logo.svg"
@@ -61,7 +61,6 @@ export function SiteHeader() {
           />
         </Link>
 
-        {/* ── Desktop nav ── */}
         <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
           {orderedNavLinks.map((link) => {
             const isActive = isActiveLink(link.href);
@@ -85,15 +84,20 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* ── CTA + mobile toggle ── */}
         <div className="flex items-center gap-3">
-          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="hidden sm:block">
-            <Link
-              href="/contact"
+          <motion.div
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="hidden sm:block"
+          >
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)] lg:px-6"
             >
               Book Now
-            </Link>
+            </a>
           </motion.div>
 
           <button
@@ -108,7 +112,6 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* ── Mobile menu ── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -116,7 +119,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className="border-t border-[var(--line)] bg-(--background) lg:hidden"
+            className="border-t border-[var(--line)] bg-[var(--background)] lg:hidden"
           >
             <div className="mx-auto flex w-full max-w-7xl flex-col px-4 py-4 sm:px-6">
               <nav className="flex flex-col">
@@ -130,7 +133,7 @@ export function SiteHeader() {
                       className={clsx(
                         "rounded-2xl px-4 py-3 text-base font-medium transition",
                         isActive
-                          ? "bg-[rgba(243,223,213,0.55)] text-[var(--brand)]"
+                          ? "bg-[var(--brand-soft)] text-[var(--brand)]"
                           : "text-[var(--foreground)] hover:bg-white hover:text-[var(--brand)]"
                       )}
                     >
@@ -141,13 +144,15 @@ export function SiteHeader() {
               </nav>
 
               <div className="mt-4 sm:hidden">
-                <Link
-                  href="/contact"
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={closeMobileMenu}
                   className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
                 >
                   Book Now
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

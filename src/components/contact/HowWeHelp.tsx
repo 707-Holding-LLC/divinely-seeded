@@ -7,7 +7,8 @@ const helpCards = [
     description:
       "Schedule a 1-on-1 session to discuss your personal growth and wellness goals.",
     cta: "View availability",
-    href: "#form",
+    href: "https://calendly.com/divinelyseeded",
+    external: true,
   },
   {
     icon: Brain,
@@ -16,6 +17,7 @@ const helpCards = [
       "Interested in our specialized coaching programs? Let's find the right fit for you.",
     cta: "Send inquiry",
     href: "#form",
+    external: false,
   },
   {
     icon: Handshake,
@@ -24,6 +26,7 @@ const helpCards = [
       "Collaborate with us for corporate wellness or community workshops.",
     cta: "Get in touch",
     href: "#form",
+    external: false,
   },
 ];
 
@@ -38,10 +41,13 @@ export function HowWeHelp() {
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {helpCards.map((card) => {
             const Icon = card.icon;
+
             return (
               <a
                 key={card.title}
                 href={card.href}
+                target={card.external ? "_blank" : undefined}
+                rel={card.external ? "noopener noreferrer" : undefined}
                 className="group flex flex-col items-center rounded-2xl border border-[var(--line)] bg-white px-8 py-10 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand)]/10">
