@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Reveal } from "@/components/shared/reveal";
 import { SectionContainer } from "@/components/layout/section-container";
+
+const CALENDLY_URL = "https://calendly.com/divinelyseeded";
 
 export function AboutCtaSection() {
   return (
@@ -26,9 +29,14 @@ export function AboutCtaSection() {
               </p>
 
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <ButtonLink href="/contact" variant="primary" className="min-w-[240px]">
+                <Link
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-w-[240px] items-center justify-center rounded-2xl bg-[var(--brand)] px-6 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
+                >
                   Book a Session
-                </ButtonLink>
+                </Link>
 
                 <ButtonLink href="/programs" variant="dark" className="min-w-[240px]">
                   Explore Programs
