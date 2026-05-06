@@ -34,7 +34,7 @@ export function ProgramsCtaSection() {
                 </Link>
 
                 <ButtonLink href="/resources" variant="dark" className="min-w-[250px]">
-                  Download Brochure
+                  Download Resources
                 </ButtonLink>
               </div>
             </div>

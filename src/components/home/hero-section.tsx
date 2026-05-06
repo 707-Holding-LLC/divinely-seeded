@@ -5,6 +5,8 @@ import { Reveal } from "@/components/shared/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { SectionContainer } from "@/components/layout/section-container";
 
+const CALENDLY_URL = "https://calendly.com/divinelyseeded";
+
 export function HeroSection() {
   return (
     <section className="overflow-hidden border-b border-[var(--line)]">
@@ -35,10 +37,20 @@ export function HeroSection() {
 
           <Reveal delay={0.3}>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <ButtonLink href="/contact" variant="primary" className="min-w-[200px]">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-w-[200px] items-center justify-center rounded-2xl bg-[var(--brand)] px-6 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
+              >
                 Book a Session
-              </ButtonLink>
-              <ButtonLink href="/programs" variant="secondary" className="min-w-[200px]">
+              </a>
+
+              <ButtonLink
+                href="/programs"
+                variant="secondary"
+                className="min-w-[200px]"
+              >
                 Explore Programs
               </ButtonLink>
             </div>
@@ -48,7 +60,7 @@ export function HeroSection() {
         <Reveal delay={0.15} className="order-1 lg:order-2">
           <div className="relative mx-auto h-[420px] w-full max-w-[720px] overflow-hidden rounded-[28px] bg-[#f1ece7] sm:h-[520px] lg:h-[760px]">
             <Image
-              src="/hero-image.png"
+              src="/heronew.jpeg"
               alt="Founder of Divinely Seeded"
               fill
               priority

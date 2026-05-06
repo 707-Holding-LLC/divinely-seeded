@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/programs",
     "/resources",
-    "/community-impact",
+    //"/community-impact",
     "/contact",
     "/privacy-policy",
     "/terms-of-service",

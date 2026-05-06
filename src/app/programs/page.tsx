@@ -1,28 +1,17 @@
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ProgramsHeroSection } from "@/components/programs/programs-hero-section";
-import { ProgramsGridSection } from "@/components/programs/programs-grid-section";
+import { PackagesSection } from "@/components/programs/programs-packages-section";
+import { ClientJourneySection } from "@/components/programs/programs-client-journey-section";
+import { ScopeSection } from "@/components/programs/programs-scope-section";
 import { ProgramsCtaSection } from "@/components/programs/programs-cta-section";
+import { VoicesOfImpactSection } from "@/components/community-impact/voices-of-impact-section";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Explore Divinely Seeded wellness programs, including personalized coaching, group experiences, workshops, and guided wellness support for women.",
-  alternates: {
-    canonical: "/programs",
-  },
-  openGraph: {
-    title: "Programs | Divinely Seeded",
-    description:
-      "Explore Divinely Seeded wellness programs, including personalized coaching, group experiences, workshops, and guided wellness support for women.",
-    url: "/programs",
-  },
-  twitter: {
-    title: "Programs | Divinely Seeded",
-    description:
-      "Explore Divinely Seeded wellness programs, including personalized coaching, group experiences, workshops, and guided wellness support for women.",
-  },
+    "Explore Divinely Seeded's wellness coaching packages — Seed, Bloom, and Concierge — designed to support metabolic health, lifestyle transformation, and sustainable wellbeing.",
 };
 
 export default function ProgramsPage() {
@@ -30,7 +19,10 @@ export default function ProgramsPage() {
     <main className="min-h-screen bg-[var(--background)]">
       <SiteHeader />
       <ProgramsHeroSection />
-      <ProgramsGridSection />
+      <PackagesSection />
+      <ClientJourneySection />
+      <ScopeSection />
+      <VoicesOfImpactSection />
       <ProgramsCtaSection />
       <SiteFooter />
     </main>

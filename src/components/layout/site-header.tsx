@@ -28,7 +28,7 @@ export function SiteHeader() {
       "/about",
       "/programs",
       "/resources",
-      "/community-impact",
+      //"/community-impact",
       "/contact",
     ];
     const orderMap = new Map(desiredOrder.map((href, index) => [href, index]));

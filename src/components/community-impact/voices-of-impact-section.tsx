@@ -12,7 +12,7 @@ export function VoicesOfImpactSection() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="text-5xl text-[#f1b093]">”</div>
             <h2 className="mt-3 text-4xl font-bold text-[var(--foreground)] sm:text-5xl">
-              Voices of Impact
+              Stories of Transformation
             </h2>
           </div>
         </Reveal>

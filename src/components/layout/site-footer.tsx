@@ -81,7 +81,7 @@ const navColumnOne = [
 
 const navColumnTwo = [
   { label: "Resources", href: "/resources" },
-  { label: "Community Impact", href: "/community-impact" },
+  //{ label: "Community Impact", href: "/community-impact" },
   { label: "Contact", href: "/contact" },
 ];
 

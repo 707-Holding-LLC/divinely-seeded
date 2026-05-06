@@ -27,7 +27,7 @@ export function MissionSection() {
           <div className="relative mx-auto w-full max-w-[620px]">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] shadow-sm">
               <Image
-                src="/our-mission.png"
+                src="/hero-image.png"
                 alt="Our mission visual"
                 fill
                 className="object-cover"

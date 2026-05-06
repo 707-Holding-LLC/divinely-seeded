@@ -3,7 +3,7 @@ export const navLinks = [
   { label: "About", href: "/about" },
   { label: "Programs", href: "/programs" },
   { label: "Resources", href: "/resources" },
-  { label: "Community Impact", href: "/community-impact" },
+  //{ label: "Community Impact", href: "/community-impact" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -24,8 +24,8 @@ export const testimonials = [
   },
   {
     quote:
-      "What stands out about Nnenna is how intentional and heartfelt her work is. Divinely Seeded does not feel surface-level or performative — it feels genuine, thoughtful, and deeply rooted in helping women experience real wellness, peace, and sustainable transformation. Her approach is warm, practical, and incredibly encouraging.",
-    name: "Sarah Effiong",
+      "What stands out about Nnenna is how intentional and heartfelt her work is. Divinely Seeded does not feel surface-level or performative, it feels genuine, thoughtful, and deeply rooted in helping women experience real wellness, peace, and sustainable transformation. Her approach is warm, practical, and incredibly encouraging.",
+    name: "S. Effiong",
     initials: "SE",
     role: "Brand Supporter",
   },
@@ -33,19 +33,19 @@ export const testimonials = [
 
 export const featuredPrograms = [
   {
-    title: "1-on-1 Personalized Coaching",
+    title: "Metabolic Wellness Discovery Session",
     description:
-      "Deep-dive wellness sessions tailored to your goals, lifestyle, and personal growth journey.",
+      "A focused, one-time strategy session designed to help you prepare for an informed conversation with your licensed medical provider. ",
     image: "/beautiful-nnenna-3.jpeg",
-    badge: "Premium",
+    badge: "Start Here",
     href: "/programs",
   },
   {
-    title: "Holistic Group Programs",
+    title: "12-Week Regenerative Wellness Coaching",
     description:
-      "Supportive group wellness experiences centered on mindfulness, accountability, and community.",
+      "A deeper 12-week coaching container for clients who want a complete lifestyle transformation rooted in metabolic health, nourishment, accountability, nervous system balance, and sustainable wellness habits.",
     image: "/holistic-group.png",
-    badge: "Community",
+    badge: "Most Popular",
     href: "/programs",
   },
 ];
