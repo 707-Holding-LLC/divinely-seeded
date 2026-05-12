@@ -36,7 +36,7 @@ export function ProgramsHeroSection() {
         <Reveal delay={0.16}>
           <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[#fbf2ed] px-8 py-7">
             <p className="text-lg leading-8 text-[var(--foreground)]">
-              At Divinely Seeded, our coaching is designed for women and men
+              At Divinely Seeded, our coaching is designed for women
               who want to feel informed, supported, and grounded while
               navigating metabolic health, peptide-informed wellness, body
               composition, energy, inflammation, and sustainable lifestyle

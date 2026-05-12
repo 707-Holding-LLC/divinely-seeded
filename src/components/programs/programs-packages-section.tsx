@@ -71,7 +71,7 @@ const packages = [
   {
     name: "Concierge",
     tag: "Premium Experience",
-    price: "3-Month from $8,997 · 6-Month from $15,997",
+    price: "By application only. Limited to one client per quarter.",
     subtitle: "High-Touch Wellness Navigation",
     description:
       "A premium, high-touch coaching experience for clients who desire a more personalized, guided, and elevated wellness journey with white-glove support around lifestyle optimization and wellness organization.",
