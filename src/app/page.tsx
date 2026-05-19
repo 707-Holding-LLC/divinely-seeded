@@ -11,6 +11,8 @@ import { client } from "@/sanity/lib/client";
 import { homePageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import type { HomePageData, SiteSettings } from "@/sanity/lib/types";
 
+export const dynamic = "force-dynamic"; 
+
 const siteUrl = "https://www.divinelyseeded.com";
 
 const homePageSchema = {
