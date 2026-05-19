@@ -6,6 +6,9 @@ import { HowWeHelp } from "@/components/contact/HowWeHelp";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { JsonLd } from "@/components/seo/json-ld";
+import { sanityFetch } from "@/sanity/lib/live";
+import { contactPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import type { ContactPageData, SiteSettings } from "@/sanity/lib/types";
 
 const siteUrl = "https://www.divinelyseeded.com";
 
@@ -59,23 +62,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [{ data: page }, { data: settings }] = await Promise.all([
+    sanityFetch({ query: contactPageQuery }),
+    sanityFetch({ query: siteSettingsQuery }),
+  ]);
+
+  const contactPage = (page || null) as ContactPageData | null;
+  const siteSettings = (settings || null) as SiteSettings | null;
+
   return (
     <main className="min-h-screen bg-[var(--background)]">
       <JsonLd data={contactPageSchema} />
       <JsonLd data={localBusinessSchema} />
-      <SiteHeader />
-      <ContactHero />
-      <HowWeHelp />
+      <SiteHeader settings={siteSettings} />
+      <ContactHero page={contactPage} />
+      <HowWeHelp page={contactPage} />
       <section id="form" className="pb-24">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:items-start">
-            <ContactForm />
-            <ContactInfo />
+            <ContactForm page={contactPage} />
+            <ContactInfo page={contactPage} />
           </div>
         </div>
       </section>
-      <SiteFooter />
+      <SiteFooter settings={siteSettings} />
     </main>
   );
 }

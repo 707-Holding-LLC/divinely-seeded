@@ -1,3 +1,8 @@
+import type { Metadata } from "next";
+import { sanityFetch } from "@/sanity/lib/live";
+import { programsPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import type { ProgramsPageData, SiteSettings } from "@/sanity/lib/types";
+
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ProgramsHeroSection } from "@/components/programs/programs-hero-section";
@@ -6,7 +11,6 @@ import { ClientJourneySection } from "@/components/programs/programs-client-jour
 import { ScopeSection } from "@/components/programs/programs-scope-section";
 import { ProgramsCtaSection } from "@/components/programs/programs-cta-section";
 import { VoicesOfImpactSection } from "@/components/community-impact/voices-of-impact-section";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Programs",
@@ -14,17 +18,25 @@ export const metadata: Metadata = {
     "Explore Divinely Seeded's wellness coaching packages — Seed, Bloom, and Concierge — designed to support metabolic health, lifestyle transformation, and sustainable wellbeing.",
 };
 
-export default function ProgramsPage() {
+export default async function ProgramsPage() {
+  const [page, settings] = await Promise.all([
+    sanityFetch({ query: programsPageQuery }),
+    sanityFetch({ query: siteSettingsQuery }),
+  ]);
+
+  const programsPage = page?.data as ProgramsPageData | null;
+  const siteSettings = settings?.data as SiteSettings | null;
+
   return (
     <main className="min-h-screen bg-[var(--background)]">
-      <SiteHeader />
-      <ProgramsHeroSection />
-      <PackagesSection />
-      <ClientJourneySection />
-      <ScopeSection />
-      <VoicesOfImpactSection />
-      <ProgramsCtaSection />
-      <SiteFooter />
+      <SiteHeader settings={siteSettings} />
+      <ProgramsHeroSection page={programsPage} />
+      <PackagesSection page={programsPage} />
+      <ClientJourneySection page={programsPage} />
+      <ScopeSection page={programsPage} />
+      <VoicesOfImpactSection page={programsPage} />
+      <ProgramsCtaSection page={programsPage} />
+      <SiteFooter settings={siteSettings} />
     </main>
   );
 }

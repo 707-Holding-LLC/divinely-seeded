@@ -3,8 +3,14 @@
 import Image from "next/image";
 import { Reveal } from "@/components/shared/reveal";
 import { SectionContainer } from "@/components/layout/section-container";
+import { urlFor } from "@/sanity/lib/image";
+import type { AboutPageData } from "@/sanity/lib/types";
 
-const values = [
+type AboutValuesSectionProps = {
+  page?: AboutPageData | null;
+};
+
+const fallbackValues = [
   {
     title: "Integrity",
     description:
@@ -27,7 +33,13 @@ const values = [
   },
 ];
 
-export function AboutValuesSection() {
+export function AboutValuesSection({ page }: AboutValuesSectionProps) {
+  const values = page?.values?.length ? page.values : fallbackValues;
+
+  const imageUrl = page?.valuesImage
+    ? urlFor(page.valuesImage).width(1400).height(1050).url()
+    : "/beautiful-nnenna-2.jpeg";
+
   return (
     <section className="py-20 lg:py-24">
       <SectionContainer>
@@ -35,30 +47,29 @@ export function AboutValuesSection() {
           <div>
             <Reveal>
               <span className="inline-flex rounded-full bg-[#f3dfd5] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--brand)]">
-                Mission, Vision & Values
+                {page?.valuesEyebrow || "Mission, Vision & Values"}
               </span>
             </Reveal>
 
             <Reveal delay={0.08}>
               <h1 className="mt-6 text-5xl font-bold leading-[0.95] text-[var(--foreground)] sm:text-6xl lg:text-[5rem]">
-                Rooted in Wellness.
+                {page?.valuesTitleLineOne || "Rooted in Wellness."}
                 <br />
-                Guided by Purpose.
+                {page?.valuesTitleLineTwo || "Guided by Purpose."}
               </h1>
             </Reveal>
 
             <Reveal delay={0.14}>
               <p className="mt-8 max-w-3xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-                Divinely Seeded exists to inspire and support women in nurturing
-                their divine potential through holistic wellness, self-awareness,
-                and lifestyle transformation.
+                {page?.valuesBodyOne ||
+                  "Divinely Seeded exists to inspire and support women in nurturing their divine potential through holistic wellness, self-awareness, and lifestyle transformation."}
               </p>
             </Reveal>
 
             <Reveal delay={0.18}>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-                Our vision is radiant health, emotional balance, and a deeper
-                connection to purpose — rooted in divine alignment.
+                {page?.valuesBodyTwo ||
+                  "Our vision is radiant health, emotional balance, and a deeper connection to purpose — rooted in divine alignment."}
               </p>
             </Reveal>
           </div>
@@ -67,10 +78,11 @@ export function AboutValuesSection() {
             <div className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-[30px] shadow-[0_18px_45px_rgba(16,32,66,0.08)]">
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/beautiful-nnenna-2.jpeg"
-                  alt="Divinely Seeded mission and values"
+                  src={imageUrl}
+                  alt={page?.valuesImageAlt || "Divinely Seeded mission and values"}
                   fill
                   priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
                 />
               </div>
@@ -80,7 +92,7 @@ export function AboutValuesSection() {
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {values.map((value, index) => (
-            <Reveal key={value.title} delay={0.08 + index * 0.08}>
+            <Reveal key={`${value.title}-${index}`} delay={0.08 + index * 0.08}>
               <article className="rounded-[28px] bg-white p-8 shadow-[0_10px_30px_rgba(16,32,66,0.05)]">
                 <div className="mb-5 text-2xl text-[var(--brand)]">✦</div>
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">

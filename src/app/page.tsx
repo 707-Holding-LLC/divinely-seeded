@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { HeroSection } from "@/components/home/hero-section";
@@ -5,8 +6,10 @@ import { MissionSection } from "@/components/home/mission-section";
 import { FounderSection } from "@/components/home/founder-section";
 import { FeaturedProgramsSection } from "@/components/home/featured-programs-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
-import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
+import { client } from "@/sanity/lib/client";
+import { homePageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import type { HomePageData, SiteSettings } from "@/sanity/lib/types";
 
 const siteUrl = "https://www.divinelyseeded.com";
 
@@ -60,19 +63,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [settings, page] = await Promise.all([
+    client.fetch<SiteSettings | null>(siteSettingsQuery),
+    client.fetch<HomePageData | null>(homePageQuery),
+  ]);
+
   return (
     <main className="min-h-screen bg-[var(--background)]">
       <JsonLd data={homePageSchema} />
       <JsonLd data={serviceSchema} />
 
-      <SiteHeader />
-      <HeroSection />
-      <MissionSection />
-      <FounderSection />
-      <FeaturedProgramsSection />
-      <TestimonialsSection />
-      <SiteFooter />
+      <SiteHeader settings={settings} />
+      <HeroSection page={page} />
+      <MissionSection page={page} />
+      <FounderSection page={page} />
+      <FeaturedProgramsSection page={page} />
+      <TestimonialsSection page={page} />
+      <SiteFooter settings={settings} />
     </main>
   );
 }

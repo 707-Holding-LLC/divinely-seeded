@@ -2,8 +2,13 @@
 
 import { Reveal } from "@/components/shared/reveal";
 import { SectionContainer } from "@/components/layout/section-container";
+import type { AboutPageData } from "@/sanity/lib/types";
 
-const differentiators = [
+type AboutDifferentiatorsSectionProps = {
+  page?: AboutPageData | null;
+};
+
+const fallbackDifferentiators = [
   {
     title: "Holistic and spiritually grounded",
     description:
@@ -26,28 +31,35 @@ const differentiators = [
   },
 ];
 
-export function AboutDifferentiatorsSection() {
+export function AboutDifferentiatorsSection({
+  page,
+}: AboutDifferentiatorsSectionProps) {
+  const differentiators =
+    page?.differentiators?.length
+      ? page.differentiators
+      : fallbackDifferentiators;
+
   return (
     <section className="py-20 lg:py-24">
       <SectionContainer>
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
             <h2 className="text-4xl font-bold text-[var(--foreground)] sm:text-5xl">
-              What Makes Divinely Seeded Different
+              {page?.differentiatorsTitle || "What Makes Divinely Seeded Different"}
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-[var(--muted)] sm:text-xl">
-              Our work is designed to be deeply human, spiritually grounded, and
-              practical enough to support real, sustainable transformation.
+              {page?.differentiatorsIntro ||
+                "Our work is designed to be deeply human, spiritually grounded, and practical enough to support real, sustainable transformation."}
             </p>
           </Reveal>
         </div>
 
         <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {differentiators.map((item, index) => (
-            <Reveal key={item.title} delay={0.1 + index * 0.06}>
+            <Reveal key={`${item.title}-${index}`} delay={0.1 + index * 0.06}>
               <article className="rounded-[26px] border border-[#ebedf2] bg-white p-8 shadow-[0_10px_30px_rgba(16,32,66,0.04)]">
                 <h3 className="text-2xl font-semibold leading-tight text-[var(--foreground)]">
                   {item.title}

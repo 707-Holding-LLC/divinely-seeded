@@ -8,8 +8,11 @@ import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data/site";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-const CALENDLY_URL = "https://calendly.com/divinelyseeded";
+type SiteHeaderProps = {
+  settings?: SiteSettings | null;
+};
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith("/")) {
@@ -18,19 +21,17 @@ function normalizePath(path: string) {
   return path;
 }
 
-export function SiteHeader() {
+export function SiteHeader({ settings }: SiteHeaderProps) {
   const pathname = normalizePath(usePathname());
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const calendlyOrHeaderLink =
+    settings?.headerCtaLink || settings?.calendlyUrl || "https://calendly.com/divinelyseeded";
+  const headerCtaLabel = settings?.headerCtaLabel || "Book Now";
+  const logoAlt = settings?.logoAlt || "Divinely Seeded logo";
+
   const orderedNavLinks = useMemo(() => {
-    const desiredOrder = [
-      "/",
-      "/about",
-      "/programs",
-      "/resources",
-      //"/community-impact",
-      "/contact",
-    ];
+    const desiredOrder = ["/", "/about", "/programs", "/resources", "/contact"];
     const orderMap = new Map(desiredOrder.map((href, index) => [href, index]));
     return [...navLinks].sort((a, b) => {
       const aIndex = orderMap.get(a.href) ?? 999;
@@ -46,6 +47,7 @@ export function SiteHeader() {
   };
 
   const closeMobileMenu = () => setMobileOpen(false);
+  const ctaIsExternal = calendlyOrHeaderLink.startsWith("http");
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(248,246,243,0.95)] backdrop-blur">
@@ -53,7 +55,7 @@ export function SiteHeader() {
         <Link href="/" className="shrink-0" onClick={closeMobileMenu}>
           <Image
             src="/seeded-logo.svg"
-            alt="Divinely Seeded logo"
+            alt={logoAlt}
             width={220}
             height={72}
             priority
@@ -90,14 +92,23 @@ export function SiteHeader() {
             whileTap={{ scale: 0.98 }}
             className="hidden sm:block"
           >
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)] lg:px-6"
-            >
-              Book Now
-            </a>
+            {ctaIsExternal ? (
+              <a
+                href={calendlyOrHeaderLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)] lg:px-6"
+              >
+                {headerCtaLabel}
+              </a>
+            ) : (
+              <Link
+                href={calendlyOrHeaderLink}
+                className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)] lg:px-6"
+              >
+                {headerCtaLabel}
+              </Link>
+            )}
           </motion.div>
 
           <button
@@ -144,15 +155,25 @@ export function SiteHeader() {
               </nav>
 
               <div className="mt-4 sm:hidden">
-                <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMobileMenu}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
-                >
-                  Book Now
-                </a>
+                {ctaIsExternal ? (
+                  <a
+                    href={calendlyOrHeaderLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                    className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
+                  >
+                    {headerCtaLabel}
+                  </a>
+                ) : (
+                  <Link
+                    href={calendlyOrHeaderLink}
+                    onClick={closeMobileMenu}
+                    className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-dark)]"
+                  >
+                    {headerCtaLabel}
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>

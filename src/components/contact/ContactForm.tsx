@@ -1,23 +1,20 @@
 "use client";
 
 import { useState, useRef } from "react";
+import type { ContactPageData } from "@/sanity/lib/types";
 
 const FORM_ACTION =
   "https://docs.google.com/forms/d/e/1FAIpQLSciyFufmBHE-ITumW3HrBVTDpuQ5GrOrJ8FY6y9hSUgy5FgiA/formResponse";
 
 const ENTRY_FIRST_NAME = "entry.454892663";
-const ENTRY_LAST_NAME  = "entry.1218174906";
-const ENTRY_EMAIL      = "entry.781986437";
-const ENTRY_INQUIRY    = "entry.604739016";
-const ENTRY_MESSAGE    = "entry.2123967211";
+const ENTRY_LAST_NAME = "entry.1218174906";
+const ENTRY_EMAIL = "entry.781986437";
+const ENTRY_INQUIRY = "entry.604739016";
+const ENTRY_MESSAGE = "entry.2123967211";
 
-const inquiryOptions = [
-  "General Inquiry",
-  "Book a Consultation",
-  "Coaching Inquiry",
-  "Workshops & Partnerships",
-  "Other",
-];
+type ContactFormProps = {
+  page?: ContactPageData | null;
+};
 
 function SuccessMessage() {
   return (
@@ -36,15 +33,26 @@ function SuccessMessage() {
   );
 }
 
-export function ContactForm() {
-  const [firstName, setFirstName]   = useState("");
-  const [lastName, setLastName]     = useState("");
-  const [email, setEmail]           = useState("");
-  const [inquiry, setInquiry]       = useState("General Inquiry");
-  const [message, setMessage]       = useState("");
-  const [submitted, setSubmitted]   = useState(false);
+export function ContactForm({ page }: ContactFormProps) {
+  const inquiryOptions =
+    page?.formHelpOptions?.length
+      ? page.formHelpOptions
+      : [
+          "General Inquiry",
+          "Book a Consultation",
+          "Coaching Inquiry",
+          "Workshops & Partnerships",
+          "Other",
+        ];
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [inquiry, setInquiry] = useState(inquiryOptions[0] || "General Inquiry");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const iframeRef                   = useRef<HTMLIFrameElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,11 +81,11 @@ export function ContactForm() {
         ) : (
           <>
             <h2 className="font-heading text-3xl font-bold text-[var(--foreground)] sm:text-4xl">
-              Send us a message
+              {page?.formTitle || "Send us a message"}
             </h2>
             <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-              Fill out the form below and our team will get back to you within
-              24–48 hours.
+              {page?.formIntro ||
+                "Fill out the form below and our team will get back to you within 24–48 hours."}
             </p>
 
             <form
@@ -87,14 +95,12 @@ export function ContactForm() {
               onSubmit={handleSubmit}
               className="mt-8 space-y-5"
             >
-              {/* Hidden inputs — carry all values into the POST */}
               <input type="hidden" name={ENTRY_FIRST_NAME} value={firstName} />
-              <input type="hidden" name={ENTRY_LAST_NAME}  value={lastName} />
-              <input type="hidden" name={ENTRY_EMAIL}      value={email} />
-              <input type="hidden" name={ENTRY_INQUIRY}    value={inquiry} />
-              <input type="hidden" name={ENTRY_MESSAGE}    value={message} />
+              <input type="hidden" name={ENTRY_LAST_NAME} value={lastName} />
+              <input type="hidden" name={ENTRY_EMAIL} value={email} />
+              <input type="hidden" name={ENTRY_INQUIRY} value={inquiry} />
+              <input type="hidden" name={ENTRY_MESSAGE} value={message} />
 
-              {/* First + Last */}
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className={labelClass}>First Name</label>
@@ -120,9 +126,10 @@ export function ContactForm() {
                 </div>
               </div>
 
-              {/* Email */}
               <div>
-                <label className={labelClass}>Email Address</label>
+                <label className={labelClass}>
+                  {page?.formEmailLabel || "Email Address"}
+                </label>
                 <input
                   type="email"
                   required
@@ -133,9 +140,10 @@ export function ContactForm() {
                 />
               </div>
 
-              {/* Inquiry dropdown */}
               <div>
-                <label className={labelClass}>How Can We Help?</label>
+                <label className={labelClass}>
+                  {page?.formHelpLabel || "How Can We Help?"}
+                </label>
                 <div className="relative">
                   <select
                     value={inquiry}
@@ -154,15 +162,16 @@ export function ContactForm() {
                 </div>
               </div>
 
-              {/* Message */}
               <div>
-                <label className={labelClass}>Message</label>
+                <label className={labelClass}>
+                  {page?.formMessageLabel || "Message"}
+                </label>
                 <textarea
                   required
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tell us about your journey…"
+                  placeholder={page?.formMessagePlaceholder || "Tell us about your journey..."}
                   className="w-full resize-none rounded-xl border border-[#e2d5cc] bg-white px-4 py-3 text-base text-[var(--foreground)] outline-none placeholder:text-[#b8a9a0] transition focus:border-[var(--brand)]"
                 />
               </div>
@@ -172,14 +181,13 @@ export function ContactForm() {
                 disabled={submitting}
                 className="mt-2 inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[var(--brand)] text-base font-semibold text-white transition hover:bg-[var(--brand-dark)] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {submitting ? "Sending…" : "Send Message"}
+                {submitting ? "Sending…" : page?.formSubmitLabel || "Send Message"}
               </button>
             </form>
           </>
         )}
       </div>
 
-      {/* Hidden iframe absorbs Google's post-submit redirect */}
       <iframe
         ref={iframeRef}
         name="ds-contact-iframe"

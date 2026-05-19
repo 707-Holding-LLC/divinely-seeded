@@ -1,53 +1,69 @@
-import { Calendar, Brain, Handshake } from "lucide-react";
+"use client";
 
-const helpCards = [
+import { Calendar, Brain, Handshake } from "lucide-react";
+import type { ContactPageData } from "@/sanity/lib/types";
+
+type HowWeHelpProps = {
+  page?: ContactPageData | null;
+};
+
+const fallbackHelpCards = [
   {
     icon: Calendar,
     title: "Book a Consultation",
     description:
       "Schedule a 1-on-1 session to discuss your personal growth and wellness goals.",
-    cta: "View availability",
-    href: "https://calendly.com/divinelyseeded",
-    external: true,
+    ctaLabel: "View availability",
+    ctaLink: "https://calendly.com/divinelyseeded",
   },
   {
     icon: Brain,
     title: "Coaching Inquiries",
     description:
       "Interested in our specialized coaching programs? Let's find the right fit for you.",
-    cta: "Send inquiry",
-    href: "#form",
-    external: false,
+    ctaLabel: "Send inquiry",
+    ctaLink: "#form",
   },
   {
     icon: Handshake,
     title: "Workshops & Partnerships",
     description:
       "Collaborate with us for corporate wellness or community workshops.",
-    cta: "Get in touch",
-    href: "#form",
-    external: false,
+    ctaLabel: "Get in touch",
+    ctaLink: "#form",
   },
 ];
 
-export function HowWeHelp() {
+const iconMap = [Calendar, Brain, Handshake];
+
+export function HowWeHelp({ page }: HowWeHelpProps) {
+  const cards =
+    page?.helpCards?.length
+      ? page.helpCards.map((card, index) => ({
+          ...card,
+          icon: iconMap[index] || Handshake,
+        }))
+      : fallbackHelpCards;
+
   return (
     <section className="py-20 lg:py-24">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
         <h2 className="text-center font-heading text-3xl font-bold text-[var(--foreground)] sm:text-4xl">
-          How can we help?
+          {page?.helpSectionTitle || "How can we help?"}
         </h2>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {helpCards.map((card) => {
+          {cards.map((card) => {
             const Icon = card.icon;
+            const href = card.ctaLink || "#form";
+            const external = href.startsWith("http");
 
             return (
               <a
                 key={card.title}
-                href={card.href}
-                target={card.external ? "_blank" : undefined}
-                rel={card.external ? "noopener noreferrer" : undefined}
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
                 className="group flex flex-col items-center rounded-2xl border border-[var(--line)] bg-white px-8 py-10 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand)]/10">
@@ -63,7 +79,7 @@ export function HowWeHelp() {
                 </p>
 
                 <span className="mt-6 flex items-center gap-1 text-base font-semibold text-[var(--brand)] transition duration-200 group-hover:translate-x-1">
-                  {card.cta} →
+                  {card.ctaLabel || "Learn more"} →
                 </span>
               </a>
             );

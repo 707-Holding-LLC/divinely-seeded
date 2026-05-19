@@ -1,12 +1,13 @@
+"use client";
+
 import Image from "next/image";
-//import { MapPin } from "lucide-react";
+import { urlFor } from "@/sanity/lib/image";
+import type { ContactPageData } from "@/sanity/lib/types";
 
-//const PHONE    = "(872) 810-3236";
-//const EMAIL    = "info@divinelyseeded.com";
-//const ADDRESS1 = "1 E Erie St Suite 525-3498";
-//const ADDRESS2 = "Chicago, IL 60611";
+type ContactInfoProps = {
+  page?: ContactPageData | null;
+};
 
-// ── Inline SVGs — lucide-react does not export brand icons ───────────────────
 function IconInstagram() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -34,77 +35,80 @@ function IconYouTube() {
   );
 }
 
-const socials = [
-  { Component: IconInstagram, href: "https://instagram.com/divinelyseeded",  label: "Instagram" },
-  { Component: IconFacebook,  href: "https://facebook.com/divinelyseeded",   label: "Facebook" },
-];
+export function ContactInfo({ page }: ContactInfoProps) {
+  const imageUrl = page?.officeImage
+    ? urlFor(page.officeImage).width(1200).height(900).url()
+    : "/contact-office.png";
 
-export function ContactInfo() {
+  const email = page?.email || "info@divinelyseeded.com";
+
+  const socials = [
+    { Component: IconInstagram, href: page?.socialLinks?.instagram, label: "Instagram" },
+    { Component: IconFacebook, href: page?.socialLinks?.facebook, label: "Facebook" },
+    { Component: IconYouTube, href: page?.socialLinks?.youtube, label: "YouTube" },
+  ].filter((item) => item.href);
+
   return (
     <div className="space-y-8">
-      {/* Office image */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
         <Image
-          src="/contact-office.png"
-          alt="Divinely Seeded wellness sanctuary — peaceful office space"
+          src={imageUrl}
+          alt={page?.officeImageAlt || "Divinely Seeded wellness sanctuary — peaceful office space"}
           fill
+          sizes="(max-width: 1024px) 100vw, 40vw"
           className="object-cover"
         />
       </div>
 
-      {/* Visit Our Sanctuary */}
       <div className="space-y-6">
         <h3 className="font-heading text-2xl font-bold text-[var(--foreground)]">
-          Virtual Sessions
+          {page?.infoTitle || "Virtual Sessions"}
         </h3>
-        <p className="text-base leading-7 text-[var(--muted)]">
-          All sessions are held virtually, so you can connect with Nnenna
-          from the comfort of your own space.
 
+        <p className="text-base leading-7 text-[var(--muted)]">
+          {page?.infoBody ||
+            "All sessions are held virtually, so you can connect with Nnenna from the comfort of your own space."}
         </p>
 
-        
-
-        {/* Phone + Email */}
         <div className="grid grid-cols-2 gap-6">
-          
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand)]">
-              Get In Touch
+              {page?.contactEyebrow || "Get in Touch"}
             </p>
             <a
-              href="mailto:info@divinelyseeded.com"
+              href={`mailto:${email}`}
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)]"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2" />
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
-              Send Us an Email
+              {page?.contactButtonLabel || "Send Us an Email"}
             </a>
           </div>
         </div>
 
-        {/* Social icons */}
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
-            Follow Our Growth
-          </p>
-          <div className="mt-4 flex items-center gap-3">
-            {socials.map(({ Component, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-white text-[var(--muted)] transition hover:border-[var(--brand)] hover:text-[var(--brand)]"
-              >
-                <Component />
-              </a>
-            ))}
+        {!!socials.length && (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
+              {page?.socialEyebrow || "Follow Our Growth"}
+            </p>
+            <div className="mt-4 flex items-center gap-3">
+              {socials.map(({ Component, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-white text-[var(--muted)] transition hover:border-[var(--brand)] hover:text-[var(--brand)]"
+                >
+                  <Component />
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

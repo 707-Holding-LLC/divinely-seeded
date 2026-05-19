@@ -1,20 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionContainer } from "@/components/layout/section-container";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-const CALENDLY_URL = "https://calendly.com/divinelyseeded";
+type SiteFooterProps = {
+  settings?: SiteSettings | null;
+};
 
 function IconInstagram() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
@@ -24,15 +19,7 @@ function IconInstagram() {
 
 function IconFacebook() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
@@ -40,38 +27,12 @@ function IconFacebook() {
 
 function IconEmail() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="4" width="20" height="16" rx="2" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   );
 }
-
-const socials = [
-  {
-    Component: IconInstagram,
-    href: "https://instagram.com/divinelyseeded",
-    label: "Instagram",
-  },
-  {
-    Component: IconFacebook,
-    href: "https://facebook.com/divinelyseeded",
-    label: "Facebook",
-  },
-  {
-    Component: IconEmail,
-    href: "mailto:info@divinelyseeded.com",
-    label: "Email",
-  },
-];
 
 const navColumnOne = [
   { label: "Home", href: "/" },
@@ -81,11 +42,39 @@ const navColumnOne = [
 
 const navColumnTwo = [
   { label: "Resources", href: "/resources" },
-  //{ label: "Community Impact", href: "/community-impact" },
   { label: "Contact", href: "/contact" },
 ];
 
-export function SiteFooter() {
+export function SiteFooter({ settings }: SiteFooterProps) {
+  const calendlyUrl = settings?.calendlyUrl || "https://calendly.com/divinelyseeded";
+  const contactEmail = settings?.contactEmail || "info@divinelyseeded.com";
+  const logoAlt = settings?.logoAlt || "Divinely Seeded logo";
+  const footerText =
+    settings?.footerText ||
+    "Your partner in holistic wellness. Empowering women to live balanced, purposeful, and radiant lives.";
+  const copyrightText =
+    settings?.copyrightText || "© 2026 Divinely Seeded Wellness. All rights reserved.";
+  const privacyLink = settings?.privacyPolicyLink || "/privacy-policy";
+  const termsLink = settings?.termsOfServiceLink || "/terms-of-service";
+
+  const socials = [
+    {
+      Component: IconInstagram,
+      href: settings?.instagramUrl || "https://instagram.com/divinelyseeded",
+      label: "Instagram",
+    },
+    {
+      Component: IconFacebook,
+      href: settings?.facebookUrl || "https://facebook.com/divinelyseeded",
+      label: "Facebook",
+    },
+    {
+      Component: IconEmail,
+      href: `mailto:${contactEmail}`,
+      label: "Email",
+    },
+  ];
+
   return (
     <footer className="border-t border-[var(--line)] bg-[var(--background)]">
       <SectionContainer className="py-12 lg:py-14">
@@ -93,15 +82,14 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <Image
               src="/seeded-logo.svg"
-              alt="Divinely Seeded logo"
+              alt={logoAlt}
               width={220}
               height={72}
               className="h-auto w-[150px] sm:w-[170px]"
             />
 
             <p className="mt-5 text-[15px] leading-7 text-[var(--muted)] sm:text-base">
-              Your partner in holistic wellness. Empowering women to live
-              balanced, purposeful, and radiant lives.
+              {footerText}
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -152,10 +140,10 @@ export function SiteFooter() {
                 Contact
               </p>
               <a
-                href="mailto:info@divinelyseeded.com"
+                href={`mailto:${contactEmail}`}
                 className="mt-3 block text-[15px] leading-7 text-[var(--muted)] transition hover:text-[var(--brand)] sm:text-base"
               >
-                info@divinelyseeded.com
+                {contactEmail}
               </a>
             </div>
 
@@ -164,7 +152,7 @@ export function SiteFooter() {
                 Book a Session
               </p>
               <a
-                href={CALENDLY_URL}
+                href={calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex text-[15px] text-[var(--muted)] transition hover:text-[var(--brand)] sm:text-base"
@@ -177,19 +165,13 @@ export function SiteFooter() {
 
         <div className="mt-10 border-t border-[var(--line)] pt-6">
           <div className="flex flex-col gap-4 text-sm text-[#9aa3b7] md:flex-row md:items-center md:justify-between">
-            <p>© 2026 Divinely Seeded Wellness. All rights reserved.</p>
+            <p>{copyrightText}</p>
 
             <div className="flex flex-wrap items-center gap-5">
-              <Link
-                href="/privacy-policy"
-                className="transition hover:text-[var(--brand)]"
-              >
+              <Link href={privacyLink} className="transition hover:text-[var(--brand)]">
                 Privacy Policy
               </Link>
-              <Link
-                href="/terms-of-service"
-                className="transition hover:text-[var(--brand)]"
-              >
+              <Link href={termsLink} className="transition hover:text-[var(--brand)]">
                 Terms of Service
               </Link>
             </div>
