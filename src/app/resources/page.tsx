@@ -9,6 +9,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { resourcesPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import type { ResourcesPageData, SiteSettings } from "@/sanity/lib/types";
 
+export const dynamic = "force-dynamic"; 
+
 export const metadata: Metadata = {
   title: "Resources",
   description:

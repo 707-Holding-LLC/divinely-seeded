@@ -14,6 +14,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { aboutPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import type { AboutPageData, SiteSettings } from "@/sanity/lib/types";
 
+export const dynamic = "force-dynamic"; 
+
 const siteUrl = "https://www.divinelyseeded.com";
 
 const aboutPageSchema = {

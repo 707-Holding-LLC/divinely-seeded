@@ -12,6 +12,8 @@ import { ScopeSection } from "@/components/programs/programs-scope-section";
 import { ProgramsCtaSection } from "@/components/programs/programs-cta-section";
 import { VoicesOfImpactSection } from "@/components/community-impact/voices-of-impact-section";
 
+export const dynamic = "force-dynamic"; 
+
 export const metadata: Metadata = {
   title: "Programs",
   description:
