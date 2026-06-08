@@ -242,6 +242,14 @@ export const resourcesPageQuery = groq`
       coverAlt
     },
 
+    articlesCta{
+      eyebrow,
+      title,
+      body,
+      ctaLabel,
+      ctaLink
+    },
+
     featuredArticleSectionEyebrow,
     featuredArticleSectionTitle,
     featuredArticle{
@@ -272,6 +280,55 @@ export const resourcesPageQuery = groq`
       image,
       imageAlt
     }
+  }
+`;
+
+export const blogPostsQuery = groq`
+  *[
+    _type == "blogPost" &&
+    status == "published"
+  ] | order(coalesce(publishAt, _createdAt) desc) {
+    _id,
+    title,
+    slug,
+    brand,
+    contentPillar,
+    excerpt,
+    featuredImage,
+    featuredImageAlt,
+    author,
+    publishAt,
+    status,
+    approvalStatus,
+    complianceStatus,
+    seoKeyword
+  }
+`;
+
+export const blogPostBySlugQuery = groq`
+  *[
+    _type == "blogPost" &&
+    slug.current == $slug &&
+    status == "published"
+  ][0] {
+    _id,
+    title,
+    slug,
+    brand,
+    contentPillar,
+    excerpt,
+    featuredImage,
+    featuredImageAlt,
+    body,
+    author,
+    publishAt,
+    status,
+    approvalStatus,
+    complianceStatus,
+    sourceTranscriptLink,
+    sourceFileLink,
+    seoKeyword,
+    platformRepurposeNotes
   }
 `;
 

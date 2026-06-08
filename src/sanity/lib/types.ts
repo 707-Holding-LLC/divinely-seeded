@@ -240,6 +240,14 @@ export type ResourceDownloadItem = {
   coverAlt?: string;
 };
 
+export type ArticlesCtaData = {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  ctaLabel?: string;
+  ctaLink?: string;
+};
+
 export type FeaturedArticleData = {
   url?: string;
   sourceInitial?: string;
@@ -282,6 +290,8 @@ export type ResourcesPageData = {
   downloadsSectionIntro?: string;
   downloads?: ResourceDownloadItem[];
 
+  articlesCta?: ArticlesCtaData;
+  
   featuredArticleSectionEyebrow?: string;
   featuredArticleSectionTitle?: string;
   featuredArticle?: FeaturedArticleData;
@@ -351,6 +361,33 @@ export type PortableTextBlock = {
   style?: string;
   listItem?: string;
   level?: number;
+};
+
+
+export type BlogPostSummary = {
+  _id: string;
+  title?: string;
+  slug?: {
+    current?: string;
+  };
+  brand?: "DS";
+  contentPillar?: string;
+  excerpt?: string;
+  featuredImage?: unknown;
+  featuredImageAlt?: string;
+  author?: string;
+  publishAt?: string;
+  status?: "draft" | "in-review" | "approved" | "scheduled" | "published" | "archived";
+  approvalStatus?: "not-submitted" | "pending-approval" | "approved" | "needs-revision";
+  complianceStatus?: "not-checked" | "passed" | "flagged" | "needs-human-review";
+  seoKeyword?: string;
+};
+
+export type BlogPostData = BlogPostSummary & {
+  body?: PortableTextBlock[];
+  sourceTranscriptLink?: string;
+  sourceFileLink?: string;
+  platformRepurposeNotes?: string;
 };
 
 export type LegalDocumentPageData = {

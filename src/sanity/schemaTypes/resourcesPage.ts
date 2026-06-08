@@ -136,6 +136,47 @@ export const resourcesPageType = defineType({
         }),
       ],
     }),
+    
+    
+    defineField({
+      name: 'articlesCta',
+      title: 'Articles CTA Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'eyebrow',
+          title: 'Eyebrow',
+          type: 'string',
+          initialValue: 'Wellness Articles',
+        }),
+        defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+          initialValue: 'Read grounded reflections for intentional wellness.',
+        }),
+        defineField({
+          name: 'body',
+          title: 'Body',
+          type: 'text',
+          rows: 4,
+          initialValue:
+            'Explore Divinely Seeded articles on wellness, faith, provider-informed conversations, and everyday practices for living with more clarity and intention.',
+        }),
+        defineField({
+          name: 'ctaLabel',
+          title: 'CTA Label',
+          type: 'string',
+          initialValue: 'Read Wellness Articles',
+        }),
+        defineField({
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'string',
+          initialValue: '/resources/articles',
+        }),
+      ],
+    }),
 
     defineField({
       name: 'featuredArticleSectionEyebrow',

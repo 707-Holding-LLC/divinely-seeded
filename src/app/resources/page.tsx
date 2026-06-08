@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ResourcesHeroSection } from "@/components/resources/resources-hero-section";
 import { WorkbooksSection } from "@/components/resources/workbooks-section";
+import { ArticlesCtaSection } from "@/components/resources/articles-cta-section";
 import { FeaturedArticleSection } from "@/components/resources/featured-article-section";
 import { OnlineCoursesSection } from "@/components/resources/online-courses-section";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -45,6 +46,7 @@ export default async function ResourcesPage() {
       <SiteHeader settings={siteSettings} />
       <ResourcesHeroSection page={resourcesPage} />
       <WorkbooksSection page={resourcesPage} />
+      <ArticlesCtaSection page={resourcesPage} />
       <FeaturedArticleSection page={resourcesPage} />
       <OnlineCoursesSection page={resourcesPage} />
       <SiteFooter settings={siteSettings} />
